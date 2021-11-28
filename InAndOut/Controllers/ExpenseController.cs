@@ -13,16 +13,38 @@ namespace InAndOut.Controllers
     public class ExpenseController : Controller
     {
         private readonly ApplicationDbContext _context;
-
         public ExpenseController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         // GET: Expenses
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchFilter)
         {
-            return View(await _context.Expenses.ToListAsync());
+            var Expense = string.IsNullOrEmpty(searchFilter) ? 
+                _context.Expenses.Select(q => q) : 
+                _context.Expenses.Where(q => q.Name.Contains(searchFilter) || 
+                                        q.Cost.ToString().Contains(searchFilter));
+            ViewBag.ESortOrder = sortOrder == "dExpense" ? "aExpense" : "dExpense";
+            ViewBag.ASortOrder = sortOrder == "dAmount" ? "aAmount" : "dAmount";
+            ViewBag.CSortOrder = sortOrder == "dCreated" ? "aCreated" : "dCreated";
+            ViewBag.USortOrder = sortOrder == "dUpdated" ? "aUpdated" : "dUpdated";
+            ViewBag.SearchFilter = searchFilter;
+
+            Expense = sortOrder switch
+            {
+                "aExpense" => Expense.OrderBy(q => q.Name),
+                "aAmount"  => Expense.OrderBy(q => q.Cost),
+                "aCreated" => Expense.OrderBy(q => q.CreatedAt),
+                "aUpdated" => Expense.OrderBy(q => q.UpdatedAt),
+                "dExpense" => Expense.OrderByDescending(q => q.Name),
+                "dAmount"  => Expense.OrderByDescending(q => q.Cost),
+                "dCreated" => Expense.OrderByDescending(q => q.CreatedAt),
+                "dUpdated" => Expense.OrderByDescending(q => q.UpdatedAt),
+                _          => Expense.OrderBy(q => q.ExpenseID)
+            };
+
+            return View(await Expense.AsNoTracking().ToListAsync());
         }
 
         // GET: Expenses/Details/5

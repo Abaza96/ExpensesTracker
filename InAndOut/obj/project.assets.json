@@ -7249,24 +7249,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hp\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Exabyte-Marketting\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hp\\OneDrive\\Projects\\dotNet\\InAndOut\\InAndOut\\InAndOut.csproj",
+      "projectUniqueName": "E:\\ExpensesTracker\\InAndOut\\InAndOut.csproj",
       "projectName": "InAndOut",
-      "projectPath": "C:\\Users\\hp\\OneDrive\\Projects\\dotNet\\InAndOut\\InAndOut\\InAndOut.csproj",
-      "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hp\\OneDrive\\Projects\\dotNet\\InAndOut\\InAndOut\\obj\\",
+      "projectPath": "E:\\ExpensesTracker\\InAndOut\\InAndOut.csproj",
+      "packagesPath": "C:\\Users\\Exabyte-Marketting\\.nuget\\packages\\",
+      "outputPath": "E:\\ExpensesTracker\\InAndOut\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Exabyte-Marketting\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7333,7 +7328,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

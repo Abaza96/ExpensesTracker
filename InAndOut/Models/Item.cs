@@ -23,10 +23,10 @@ namespace InAndOut.Models
         [StringLength(30)]
         public string Borrower { get; set; }
         [DisplayName("Lended at")]
-        [DisplayFormat(DataFormatString = "{0:mm/dd/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:MMMM, dd yyyy}")]
         public DateTime CreatedAt { get; set; }
         [DisplayName("Data Modified at")]
-        [DisplayFormat(DataFormatString = "{0:mm/dd/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:MMMM, dd yyyy}")]
         public DateTime UpdatedAt { get; set; }
     }
 }

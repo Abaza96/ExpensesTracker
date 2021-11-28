@@ -17,13 +17,14 @@ namespace InAndOut.Models
         [Required(ErrorMessage = "This Field is Required")]
         public string Name { get; set; }
         [DisplayName("Amount")]
+        [DataType(DataType.Currency)]
         [Required(ErrorMessage = "This Field is Required")]
         public float Cost { get; set; }
         [DisplayName("Created Expense at")]
-        [DisplayFormat(DataFormatString = "{0:mm/dd/yyyy}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:MMMM, dd yyyy}", ApplyFormatInEditMode = false)]
         public DateTime CreatedAt { set; get; }
         [DisplayName("Modified Expense at")]
-        [DisplayFormat(DataFormatString = "{0:mm/dd/yyyy}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:MMMM, dd yyyy}", ApplyFormatInEditMode = false)]
         public DateTime UpdatedAt { get; set; }
     }
 }

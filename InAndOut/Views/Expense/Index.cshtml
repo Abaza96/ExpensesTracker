@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Expenses List</h1>
+<h1 class="text-primary">Expenses List</h1>
 
 <p>
     <a class="btn btn-primary" asp-action="Create">Create New</a>
@@ -12,26 +12,26 @@
 
 <form class="form-inline" asp-action="Index">
     <div class="form-group">
-        <input class="form-control  " type="text" name="SearchString" value="@ViewData["searchString"]" />
+        <input class="form-control" type="text" name="searchFilter" value="@ViewBag.SearchFilter" />
         <input class="btn btn-outline-primary m-2" type="submit" value="Edeerab" />
         <a class="btn btn-outline-danger m-2" asp-action="Index">Cancel Search</a>
     </div>
 </form>
 
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.ActionLink(Html.DisplayNameFor(model => model.Name), "Index", new { sortOrder = ViewBag.ESortOrder })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cost)
+                @Html.ActionLink(Html.DisplayNameFor(model => model.Cost), "Index", new { sortOrder = ViewBag.ASortOrder })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
+                @Html.ActionLink(Html.DisplayNameFor(model => model.CreatedAt), "Index", new { sortOrder = ViewBag.CSortOrder })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UpdatedAt)
+                @Html.ActionLink(Html.DisplayNameFor(model => model.UpdatedAt), "Index", new { sortOrder = ViewBag.USortOrder })
             </th>
             <th></th>
         </tr>

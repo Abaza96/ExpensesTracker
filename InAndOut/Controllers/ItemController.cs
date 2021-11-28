@@ -23,11 +23,11 @@ namespace InAndOut.Controllers
                 _db.Items.Where(q => q.Borrower.Contains(searchString) || 
                                      q.Lender.Contains(searchString)   || 
                                      q.ItemName.Contains(searchString));
-            ViewBag.BSortOrder = string.IsNullOrEmpty(sortOrder) ? "aBorrower" : "dBorrower";
-            ViewBag.LSortOrder = string.IsNullOrEmpty(sortOrder) ? "aLender"   : "dLender";
-            ViewBag.ISortOrder = string.IsNullOrEmpty(sortOrder) ? "aItem"     : "dItem";
-            ViewBag.CSortOrder = string.IsNullOrEmpty(sortOrder) ? "aCreated"  : "dCreated";
-            ViewBag.USortOrder = string.IsNullOrEmpty(sortOrder) ? "aUpdated"  : "dUpdated";
+            ViewBag.BSortOrder = sortOrder == "dBorrower" ? "aBorrower" : "dBorrower";
+            ViewBag.LSortOrder = sortOrder == "dLender" ? "aLender"   : "dLender";
+            ViewBag.ISortOrder = sortOrder == "dItem" ? "aItem"     : "dItem";
+            ViewBag.CSortOrder = sortOrder == "dCreated" ? "aCreated"  : "dCreated";
+            ViewBag.USortOrder = sortOrder == "dUpdated" ? "aUpdated"  : "dUpdated";
             ViewBag.SearchFilter = searchString;
 
             Item = sortOrder switch
@@ -46,11 +46,24 @@ namespace InAndOut.Controllers
             };
             return View(Item.AsNoTracking().ToList());
         }
+        public IActionResult Create() => View();
         public IActionResult Details(int? id) => id == null ? NotFound() : _db.Items.Find(id) == null ? NotFound() : View(_db.Items.Find(id));
         public IActionResult Edit(int? id) => id == null ? NotFound() : _db.Items.Find(id) == null ? NotFound() : View(_db.Items.Find(id));
         public IActionResult Delete(int? id) => id == null ? NotFound() : _db.Items.FirstOrDefault(q => q.ItemID == id) == null ? 
                                                         NotFound() : View(_db.Items.FirstOrDefault(q => q.ItemID == id));
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([Bind("ItemID, Lender, Borrower, ItemName, CreatedAt, UpdatedAt")] Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Add(item);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(item);
+
+        }        [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("ItemID, Lender, Borrower, ItemName, CreatedAt, UpdatedAt")] Item item)
         {
