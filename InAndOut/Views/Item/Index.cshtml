@@ -1,0 +1,67 @@
+﻿@model IEnumerable<InAndOut.Models.Item>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Items List</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<form class="form-inline" asp-action="Index">
+    <div class="form-group">
+        <input class="form-control  " type="text" name="SearchString" value="@ViewData["searchString"]" />
+        <input class="btn btn-outline-primary m-2" type="submit" value="Edeerab" />
+        <a class="btn btn-outline-danger m-2" asp-action="Index">Cancel Search</a>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Lender", "Index", new { sortOrder = ViewBag.LSortOrder })
+            </th>
+            <th>
+                @Html.ActionLink("Item Lended", "Index", new { sortOrder = ViewBag.ISortOrder })
+            </th>
+            <th>
+                @Html.ActionLink("Borrower", "Index", new { sortOrder = ViewBag.BSortOrder })
+            </th>
+            <th>
+                @Html.ActionLink("Lended at", "Index", new { sortOrder = ViewBag.CSortOrder })
+            </th>
+            <th>
+                @Html.ActionLink("Data Modified at	", "Index", new { sortOrder = ViewBag.USortOrder })
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Borrower)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                <a class="btn btn-outline-success mx-1" asp-action="Edit" asp-route-id="@item.ItemID">Edit</a> 
+                <a class="btn btn-outline-info mx-1" asp-action="Details" asp-route-id="@item.ItemID">Details</a>
+                <a class="btn btn-outline-danger mx-1" asp-action="Delete" asp-route-id="@item.ItemID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
